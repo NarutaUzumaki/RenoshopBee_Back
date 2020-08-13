@@ -6,11 +6,17 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::resource('product', 'ProductController', ['except' => ['edit', 'show', 'store']]);
-Route::get('product', 'ProductController@index');
-Route::get('product/{id}', 'ProductController@getProductById');
-Route::get('products/catalog', 'ProductController@getCatalog');
-Route::get('cart/get', 'CartController@getFromCart');
 
-Route::post('cart/add', 'CartController@addToCart');
 Route::post('order/add', 'OrderController@addOrder');
+Route::get('products/catalog', 'ProductController@getCatalog');
 
+
+Route::group(array('prefix' => 'product'), function (){
+   Route::get('/', 'ProductController@index');
+   Route::get('/{id}', 'ProductController@getProductById');
+});
+
+Route::group(array('prefix' => 'cart'), function(){
+   Route::get('/get', 'CartController@getFromCart');
+   Route::post('/add', 'CartController@addToCart');
+});
