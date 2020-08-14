@@ -43,7 +43,6 @@ class OrderController extends Controller
                 'color'     => $product->color,
                 'quantity'  => $product->quantity,
                 'order_id'  => $id_for_order
-
             ]);
         }
         DB::table('carts')->delete();

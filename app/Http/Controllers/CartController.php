@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 class CartController extends Controller
 {
     public function addToCart(Request $request){
+        $validate = new ValidationController();
+        $res = $validate->checkData($request);
+        echo $res;
+
         $cart = new Cart();
         $cart->title = $request->input('title');
         $cart->price = $request->input('price');
